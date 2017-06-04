@@ -96,6 +96,8 @@ def instruct_rec(_file):
 			inst_list.append(imed_inst_mount(line, lineCounter + 1))
 		elif inst in reg_inst.keys():
 			inst_list.append(reg_inst_mount(line))
+		elif inst == 'NOP':
+			inst_list.append('{0:032b}'.format(0))
 		if(line[-1] != ':'):
 			lineCounter += 1
 
