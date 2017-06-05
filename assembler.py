@@ -85,6 +85,10 @@ def reg_inst_mount(line):
 		rt = int(itens[3][1:])
 		return '000000{0:05b}{1:05b}{2:05b}00000{3}'.format(rs, rt, rd, reg_inst[inst])
 
+	if(inst == 'DIV'):
+		rs = int(itens[2][1:])
+		return '000000{0:05b}{1:05b}0000000000{2}'.format(rd, rs, reg_inst[inst])
+
 	return 0
 
 def word_dec_mount(line):
