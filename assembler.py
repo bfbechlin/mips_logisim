@@ -51,7 +51,6 @@ def imed_inst_mount(line, lineCounter):
 
 	if(inst == 'BGEZ'):
 		offset = labelsTable[itens[2]] - lineCounter
-		print (offset)
 		offset = format(offset if offset >= 0 else (1 << 16) + offset, '016b')
 		if itens[2] in labelsTable.keys():
 			return '000001{0:05b}{1}{2}'.format(rs, imed_inst[inst], offset)
@@ -61,7 +60,11 @@ def imed_inst_mount(line, lineCounter):
 	if (inst == 'LW' or inst == 'SW' or inst == 'SB'):
 		buff = itens[2].replace('(', '')
 		buff = buff.replace(')', '')
-		imed = int(buff.split('R')[0])
+		imed = buff.split('R')[0]
+		if (imed in labelsTable.keys()):
+			imed = int(labelsTable[imed])*4
+		else:
+			imed = int(imed)
 		rt = int(buff.split('R')[1])
 		return '{0}{1:05b}{2:05b}{3:016b}'.format(imed_inst[inst], rt, rs, imed)
 
@@ -84,6 +87,14 @@ def reg_inst_mount(line):
 
 	return 0
 
+def word_dec_mount(line):
+	data = line.split()[1]
+	if (data in labelsTable.keys()):
+		data = int(labelsTable[data])*4
+	else:
+		data = int(data)
+	return '{0:032b}'.format(data)
+
 def instruct_rec(_file):
 	inst_list = list()
 	lineCounter = 0
@@ -96,6 +107,8 @@ def instruct_rec(_file):
 			inst_list.append(imed_inst_mount(line, lineCounter + 1))
 		elif inst in reg_inst.keys():
 			inst_list.append(reg_inst_mount(line))
+		elif inst == 'WORD':
+			inst_list.append(word_dec_mount(line))
 		elif inst == 'NOP':
 			inst_list.append('{0:032b}'.format(0))
 		if(line[-1] != ':'):
