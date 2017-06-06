@@ -1,0 +1,23 @@
+Posições MEM  - Valor esperado (Hexa):
+0 - 5		
+1 - 7	INICIO:	
+		LW R1 0(R0)
+		LW R2 4(R0)	
+2 - 5		SW R1 8(R0)
+3 - 7		SW R2 12(R0)
+		ADD R3 R1 R2
+4 - c		SW R3 16(R0)
+		SUB R3 R2 R1	
+5 - 2		SW R3 20(R0)
+		AND R3 R2 R1
+6 - 5		SW R3 24(R0)
+		OR R3 R2 R1
+7 - 7		SW R3 28(R0)
+		LW R4 0(R0)
+		BEQ R1 R4 IGUAL
+		SW R4 32(R0)
+	IGUAL:
+8 - 7		SW R2 32(R0)
+		J INICIO
+
+Obs: instruções NOP não foram consideradas, para melhor visualização.

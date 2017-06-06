@@ -1,0 +1,27 @@
+Posições MEM  - Valor esperado (Hexa):
+0 - 5		
+1 - 7	INICIO:
+		LW R1 0(R0)
+		LW R2 4(R0)	
+2 - 5		SW R1 8(R0)
+3 - 7		SW R2 12(R0)
+		DIV R2 R1
+		SLL R3 R2 2
+4 - 1c		SW R3 16(R0)	
+		SUB R4 R1 R2
+5 - fffffffe	SW R4 20(R0)
+		BGEZ R4 ERRO
+		JAL CORRETO
+	ERRO:
+		J INICIO
+	CORRETO:
+6 - 2c		SW R31 24(R0)
+		BGEZ R1 GREATER
+		SW R1 28(R0)
+	GREATER:	
+7 - 7		SW R2 28(R0)
+		BGEZ R0 ZERO
+		SW R1 32(R0)
+	ZERO:
+8 - 7		SW R2 32(R0)
+
