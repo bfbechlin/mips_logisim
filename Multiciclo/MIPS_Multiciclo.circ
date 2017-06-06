@@ -3860,8 +3860,8 @@ This file is intended to be loaded by Logisim (http://www.cburch.com/logisim/).
       <a name="addrWidth" val="10"/>
       <a name="dataWidth" val="4"/>
       <a name="contents">addr/data: 10 4
-1 6 4*0 7 9*0 1 9 14*0
-1 9 14*0 1 a 14*0 1 8
+1 6 4*0 7 9*0 1 a 14*0
+1 9 14*0 1 b 14*0 1 8
 494*0 1 2 3 4 124*0 1 2
 5
 </a>
